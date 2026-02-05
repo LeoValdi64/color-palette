@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Chromatic",
+  url: "https://chromatic.app",
+  description:
+    "Generate harmonious color palettes with 5 harmony modes. Export as CSS or JSON. Free tool for designers and developers.",
+  applicationCategory: "DesignApplication",
+  operatingSystem: "Any",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  browserRequirements: "Requires a modern web browser",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://chromatic.app"),
   title: "Chromatic - Free Color Palette Generator",
   description:
-    "Generate beautiful, harmonious color palettes instantly. Choose from analogous, complementary, triadic, split-complementary, and monochromatic color schemes. Export as CSS or JSON. Free online tool for designers and developers.",
+    "Generate harmonious color palettes with 5 harmony modes. Export as CSS or JSON. Free tool for designers and developers.",
   keywords: [
     "color palette generator",
     "color scheme",
@@ -20,10 +37,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Chromatic" }],
   creator: "Chromatic",
+  alternates: {
+    canonical: "https://chromatic.app",
+  },
   openGraph: {
     title: "Chromatic - Free Color Palette Generator",
     description:
-      "Generate beautiful, harmonious color palettes instantly. Choose from 5 different color harmony modes and export as CSS or JSON.",
+      "Generate harmonious color palettes with 5 harmony modes. Export as CSS or JSON. Free tool for designers and developers.",
     url: "https://chromatic.app",
     siteName: "Chromatic",
     locale: "en_US",
@@ -41,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chromatic - Free Color Palette Generator",
     description:
-      "Generate beautiful, harmonious color palettes instantly. Choose from 5 different color harmony modes.",
+      "Generate harmonious color palettes with 5 harmony modes. Export as CSS or JSON.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -67,7 +87,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
